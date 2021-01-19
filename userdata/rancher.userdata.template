@@ -1,0 +1,6 @@
+#!/bin/bash -x
+
+curl -sfL https://get.rancher.io | sh -
+systemctl enable rancherd-server.service
+systemctl start rancherd-server.service
+
