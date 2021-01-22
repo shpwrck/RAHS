@@ -11,4 +11,4 @@
 * Certificates that are valid for both the local rancher url and the global rancher url.
 * Rancher Installation on each rancher cluster
 * Rancher import manifest on each managed cluster
-* External Rancher Cluster with fleet secrets and clusters.
+* External Rancher Cluster with fleet secrets (containing KUBECONFIG).

@@ -1,0 +1,9 @@
+apiVersion: fleet.cattle.io/v1alpha1
+kind: Cluster
+  labels:
+    role: primary
+  name: nyc3-cluster
+  namespace: poc
+spec:
+  clientID: d8nsm72pnnz6v8gftnt4dwswckndnjqzxrc64bwbzbc2cn9lqzkktk
+  kubeConfigSecret: rp-cluster

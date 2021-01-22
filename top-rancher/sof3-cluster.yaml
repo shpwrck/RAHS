@@ -1,0 +1,10 @@
+apiVersion: fleet.cattle.io/v1alpha1
+kind: Cluster
+metadata:
+  labels:
+    role: standby
+  name: sof3-cluster
+  namespace: poc
+spec:
+  clientID: nvwt5w8vq2zhg7j9b5hjqs89jfq92l8rrkhs48t4dt7k2sqdjqx97q
+  kubeConfigSecret: rs-cluster
