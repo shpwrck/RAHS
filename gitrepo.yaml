@@ -11,11 +11,11 @@ spec:
   targets:
   - clusterSelector:
       matchLabels:
-        env: primary
+        role: primary
     name: primary
   - clusterSelector:
       matchLabels:
-        env: standby
+        role: standby
     name: standby
 type: fleet.cattle.io.gitrepo
 
