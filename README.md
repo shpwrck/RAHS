@@ -1,4 +1,4 @@
-# _R_ancher _A_pplication _H_ot _S_tandby
+# Rancher Application Hot Standby
 
 * ./main.tf: Creates 4 nodes with rke2 on them
 * ./userdata: Contains the cloud-init scripts required to install and enable RKE2
