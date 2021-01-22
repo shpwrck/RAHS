@@ -6,7 +6,9 @@ metadata:
 spec:
   branch: master
   insecureSkipTLSVerify: false
-  paths: [ "/fleet/application" ]
+  paths: 
+  - "/fleet/application"
+  - "/fleet/helm-example"
   repo: https://github.com/shpwrck/RAHS
   targets:
   - clusterSelector:
