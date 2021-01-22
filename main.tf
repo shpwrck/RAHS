@@ -25,6 +25,7 @@ data "digitalocean_project" "shipwreck" {
   name = "shipwreck" 
 }
 
+/*
 resource "digitalocean_droplet" "argo" {
   image = "ubuntu-20-04-x64"
   name = "argo-server"
@@ -37,11 +38,14 @@ resource "digitalocean_droplet" "argo" {
   ] 
   user_data = file("./userdata/argo.userdata.template")
 }
+*/
 
-resource "digitalocean_droplet" "ranchers" {
+resource "digitalocean_droplet" "clusters" {
   for_each = {
     rancher-primary = "nyc3"
+    managed-primary = "nyc3"
     rancher-standby = "sfo3"
+    managed-standby = "sfo3"
   }
 
   image = "ubuntu-20-04-x64"
@@ -58,10 +62,12 @@ resource "digitalocean_droplet" "ranchers" {
 
 resource "digitalocean_project_resources" "rancher-hot-standby" {
   project = data.digitalocean_project.shipwreck.id
+
   resources = [
-    digitalocean_droplet.ranchers["rancher-primary"].urn,
-    digitalocean_droplet.ranchers["rancher-standby"].urn,
-    digitalocean_droplet.argo.urn
+    digitalocean_droplet.clusters["rancher-primary"].urn,
+    digitalocean_droplet.clusters["rancher-standby"].urn,
+    digitalocean_droplet.clusters["managed-primary"].urn,
+    digitalocean_droplet.clusters["managed-standby"].urn
   ]
 }
 
@@ -69,14 +75,16 @@ resource "digitalocean_project_resources" "rancher-hot-standby" {
 # OUTPUT #
 ##########
 
-output "primary-ssh" {
-  value = format("Primary SSH: ssh root@%s\n",digitalocean_droplet.ranchers["rancher-primary"].ipv4_address)
+output "rancher-primary-ssh" {
+  value = format("Primary SSH: ssh root@%s\n",digitalocean_droplet.clusters["rancher-primary"].ipv4_address)
+}
+output "rancher-standby-ssh" {
+  value = format("Standby SSH: ssh root@%s\n",digitalocean_droplet.clusters["rancher-standby"].ipv4_address)
 }
 
-output "standby-ssh" {
-  value = format("Standby SSH: ssh root@%s\n",digitalocean_droplet.ranchers["rancher-standby"].ipv4_address)
+output "managed-primary-ssh" {
+  value = format("Primary SSH: ssh root@%s\n",digitalocean_droplet.clusters["managed-primary"].ipv4_address)
 }
-
-output "argo-ssh" {
-  value = format("Argo SSH: ssh root@%s\n",digitalocean_droplet.argo.ipv4_address)
+output "managed-standby-ssh" {
+  value = format("Standby SSH: ssh root@%s\n",digitalocean_droplet.clusters["managed-standby"].ipv4_address)
 }
