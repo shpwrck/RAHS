@@ -1,0 +1,15 @@
+targetCustomizations:
+- name: primary
+  clusterSelector:
+    matchLabels:
+      role: primary
+  yaml:
+    overlays:
+    - scalemax
+- name: standby
+  clusterSelector:
+    matchLabels:
+      role: standby
+  yaml:
+    overlays:
+    - scalemin

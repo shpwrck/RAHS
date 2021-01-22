@@ -1,0 +1,21 @@
+apiVersion: fleet.cattle.io/v1alpha1
+kind: GitRepo
+metadata:
+  name: application
+  namespace: fleet-default
+spec:
+  branch: master
+  insecureSkipTLSVerify: false
+  paths: []
+  repo: https://github.com/shpwrck/RAHS
+  targets:
+  - clusterSelector:
+      matchLabels:
+        env: primary
+    name: primary
+  - clusterSelector:
+      matchLabels:
+        env: standby
+    name: standby
+type: fleet.cattle.io.gitrepo
+
