@@ -1,17 +1,21 @@
 apiVersion: fleet.cattle.io/v1alpha1
 kind: GitRepo
 metadata:
-  name: rancher-manager
-  namespace: poc
+  name: application
+  namespace: fleet-default
 spec:
   branch: master
   insecureSkipTLSVerify: false
-  paths: [ "/fleet/gitrepo" ]
+  paths: [ "/fleet/application" ]
   repo: https://github.com/shpwrck/RAHS
   targets:
   - clusterSelector:
       matchLabels:
         role: primary
     name: primary
+  - clusterSelector:
+      matchLabels:
+        role: standby
+    name: standby
 type: fleet.cattle.io.gitrepo
 
